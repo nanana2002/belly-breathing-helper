@@ -1,0 +1,31 @@
+{
+  "manifest_version": 3,
+  "name": "腹式呼吸小助手",
+  "version": "0.1.0",
+  "description": "久坐办公的腹式呼吸悬浮窗与提醒。",
+  "action": {
+    "default_title": "腹式呼吸",
+    "default_popup": "popup.html",
+    "default_icon": { 
+        "50": "icons/icon50.png",
+        "100": "icons/icon100.png"
+    }
+  },
+  "icons": { 
+    "50": "icons/icon50.png",
+    "100": "icons/icon100.png"
+  },
+  "permissions": ["storage", "activeTab", "scripting"],
+  "host_permissions": ["<all_urls>"],
+  "background": {
+    "service_worker": "service_worker.js"
+  },
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["content.js"],
+      "css": ["styles.css"],
+      "run_at": "document_idle"
+    }
+  ]
+}

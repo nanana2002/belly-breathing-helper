@@ -1,0 +1,223 @@
+/* =========================
+   Belly Breathing Bubble UI
+   升级：极致立体感 + 闪耀光芒
+   ========================= */
+
+#bbh-dot{
+  position: fixed;
+  right: 18px;
+  bottom: 18px;
+  width: 72px;
+  height: 72px;
+  z-index: 2147483647;
+  display: grid;
+  place-items: center;
+  user-select: none;
+  cursor: grab;
+
+  /* 核心变量：强化光影对比 */
+  --bbh-color: #ffffff;
+  --bbh-glow: rgba(255,255,255,.75); /* 提升光晕亮度 */
+  --bbh-text: rgba(0,0,0,.75);
+  --bbh-highlight: color-mix(in srgb, var(--bbh-color) 95%, white 5%); /* 高光更亮 */
+  --bbh-shadow-deep: color-mix(in srgb, var(--bbh-color) 20%, black 80%); /* 暗部更深 */
+  --bbh-shadow-outer: rgba(0,0,0,0.18);
+}
+
+#bbh-dot:active{ cursor: grabbing; }
+
+#bbh-dot.hidden{
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.4s ease-out;
+}
+
+/* 内球：极致立体质感 */
+#bbh-dot .ball{
+  width: 56px;
+  height: 56px;
+  border-radius: 9999px;
+
+  /* 多层渐变模拟真实球体光影：高光+过渡+深暗部 */
+  background: 
+    /* 主高光：模拟光源照射的亮斑 */
+    radial-gradient(circle at 20% 20%, 
+      rgba(255,255,255,0.9) 0%, 
+      transparent 35%
+    ),
+    /* 次高光：增强体积感 */
+    radial-gradient(circle at 40% 40%, 
+      var(--bbh-highlight) 0%, 
+      transparent 50%
+    ),
+    /* 暗部：模拟球体阴影，增强立体感 */
+    radial-gradient(circle at 75% 75%, 
+      var(--bbh-shadow-deep) 0%, 
+      transparent 60%
+    ),
+    /* 基础色：保留主色调 */
+    linear-gradient(135deg, 
+      color-mix(in srgb, var(--bbh-color) 98%, white 2%) 0%, 
+      var(--bbh-color) 50%, 
+      color-mix(in srgb, var(--bbh-color) 80%, black 20%) 100%
+    );
+
+  /* 双层边框：模拟球体反光边缘 */
+  border: 1px solid color-mix(in srgb, var(--bbh-color) 50%, white 50%);
+  box-shadow: 
+    /* 外层阴影：增强悬浮感 */
+    0 12px 32px var(--bbh-shadow-outer),
+    /* 内层高光阴影：模拟球体内部反光 */
+    inset 0 4px 8px rgba(255,255,255,0.25),
+    /* 内层暗部阴影：加深球体凹陷感 */
+    inset 0 -4px 8px rgba(0,0,0,0.12);
+
+  /* 质感强化：磨砂玻璃+颜色混合 */
+  backdrop-filter: blur(4px);
+  background-blend-mode: overlay;
+  overflow: hidden;
+
+  transform: scale(0.78);
+  /* 更丝滑的过渡：模拟物理惯性 */
+  transition-property: transform, filter, box-shadow;
+  transition-timing-function: cubic-bezier(0.34, 1.56, 0.64, 1);
+  transition-duration: 1000ms;
+
+  display: grid;
+  place-items: center;
+  position: relative;
+}
+
+/* 球体内部纹理：模拟呼吸的微光流动 */
+#bbh-dot .ball::after{
+  content:"";
+  position:absolute;
+  inset: -50%;
+  border-radius:9999px;
+  background: 
+    radial-gradient(circle at 35% 35%, 
+      rgba(255,255,255,0.15) 0%, 
+      transparent 65%
+    ),
+    radial-gradient(circle at 65% 65%, 
+      rgba(0,0,0,0.08) 0%, 
+      transparent 65%
+    );
+  opacity: 0.85;
+  pointer-events:none;
+  z-index: 1;
+  /* 缓慢旋转：模拟微光流动，增强闪耀感 */
+  animation: glowFlow 8s linear infinite;
+}
+
+/* 闪耀光芒：多层光晕+动态呼吸 */
+#bbh-dot .ball::before{
+  content:"";
+  position:absolute;
+  inset: -60px; /* 扩大光晕范围 */
+  border-radius:9999px;
+  /* 三层光晕：核心亮斑+过渡+外扩散，模拟闪耀效果 */
+  background: 
+    radial-gradient(circle, 
+      var(--bbh-glow) 0%, 
+      rgba(255,255,255,0.4) 35%, 
+      rgba(255,255,255,0.15) 60%, 
+      rgba(0,0,0,0) 80%
+    );
+  opacity: 0.22;
+  filter: blur(16px); /* 更大的模糊，光晕更通透 */
+  transition: opacity 0.6s cubic-bezier(0.34, 1.56, 0.64, 1), filter 0.6s ease;
+  pointer-events:none;
+  z-index: 0;
+  /* 光晕脉冲动画：模拟闪耀呼吸 */
+  animation: glowPulse 4s ease-in-out infinite;
+}
+
+/* 球上文字：增强对比度，更清晰 */
+#bbh-dot .label{
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Rounded", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", system-ui, sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  color: var(--bbh-text);
+  text-shadow: 0 1px 3px rgba(0,0,0,0.08); /* 文字阴影增强可读性 */
+  background: transparent;
+  border: none;
+  padding: 0;
+  user-select: none;
+  position: relative;
+  z-index: 2;
+}
+
+/* 吸/呼阶段：文字+球体联动效果 */
+#bbh-dot.inhale .label{
+  letter-spacing: 0.12em;
+  opacity: 0.98;
+}
+#bbh-dot.exhale .label{
+  letter-spacing: 0.06em;
+  opacity: 0.88;
+}
+
+/* 吸气：球体膨胀+更亮+光芒闪耀 */
+#bbh-dot.inhale .ball{
+  transform: scale(1.28);
+  filter: saturate(1.15) brightness(1.05); /* 更亮更饱和 */
+  box-shadow: 
+    0 16px 40px rgba(0,0,0,0.12),
+    inset 0 6px 12px rgba(255,255,255,0.3),
+    inset 0 -6px 12px rgba(0,0,0,0.08);
+}
+#bbh-dot.inhale .ball::before{ 
+  opacity: 0.75; /* 吸气时光芒最亮 */
+  filter: blur(20px); /* 光晕更大 */
+}
+
+/* 呼气：球体收缩+稍暗+光芒减弱 */
+#bbh-dot.exhale .ball{
+  transform: scale(0.70);
+  filter: saturate(1.0) brightness(0.97);
+  box-shadow: 
+    0 8px 24px rgba(0,0,0,0.2),
+    inset 0 2px 6px rgba(255,255,255,0.15),
+    inset 0 -2px 6px rgba(0,0,0,0.15);
+}
+#bbh-dot.exhale .ball::before{ 
+  opacity: 0.30; /* 呼气时光芒减弱 */
+  filter: blur(14px);
+}
+
+/* 闲置：基础状态 */
+#bbh-dot.idle .ball{
+  transform: scale(0.78);
+  filter: saturate(1.0) brightness(1.0);
+}
+#bbh-dot.idle  .ball::before{ 
+  opacity: 0.20;
+  filter: blur(16px);
+}
+
+/* 悬浮交互：球体微放大+光芒微亮 */
+#bbh-dot:not(.hidden):hover .ball{
+  transform: scale(0.85);
+  filter: saturate(1.1) brightness(1.02);
+  box-shadow: 
+    0 14px 36px rgba(0,0,0,0.15),
+    inset 0 4px 8px rgba(255,255,255,0.22),
+    inset 0 -4px 8px rgba(0,0,0,0.09);
+}
+#bbh-dot:not(.hidden):hover .ball::before{
+  opacity: 0.35; /* 悬浮时光芒更亮 */
+}
+
+/* 光芒流动动画：模拟微光旋转 */
+@keyframes glowFlow {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* 光芒脉冲动画：模拟闪耀呼吸 */
+@keyframes glowPulse {
+  0%, 100% { opacity: 0.22; }
+  50% { opacity: 0.35; }
+}

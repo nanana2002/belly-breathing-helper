@@ -1,0 +1,158 @@
+:root{
+  /* 核心配色调整：柔和莫兰迪色系，适配呼吸放松主题 */
+  --card: rgba(252, 248, 250, 0.85);      /* 卡片背景：淡粉白，提升通透感 */
+  --text: rgba(51, 48, 60, 0.9);           /* 主文字：深紫灰，比纯黑更柔和 */
+  --muted: rgba(42, 42, 44, 0.7);        /* 次要文字：浅紫灰，提升可读性 */
+  --line: rgba(206, 182, 214, 0.3);        /* 边框线：淡紫，更明显且柔和 */
+  --btn: rgba(245, 238, 247, 0.9);         /* 按钮背景：极浅紫，贴近卡片色 */
+  --btnHover: rgba(236, 224, 240, 0.95);   /* 按钮悬浮：稍深的淡紫，有交互反馈 */
+}
+
+body{
+  margin:0;
+  width: 310px;
+  padding: 14px;
+  color: var(--text);
+  /* 背景渐变调整：柔和的淡紫+白渐变，替代原灰白 */
+  background: radial-gradient(120% 120% at 20% 0%, #fefbff 0%, #f7f3fa 60%);
+  font-family:
+  -apple-system,
+  BlinkMacSystemFont,
+  "SF Pro Rounded",
+  "PingFang SC",
+  "Hiragino Sans GB",
+  "Microsoft YaHei",
+  system-ui,
+  sans-serif;
+}
+
+.header{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  margin-bottom: 10px;
+}
+
+h1{ font-size: 14px; margin:0; letter-spacing:.5px; }
+
+.badge{
+  font-size: 11px;
+  color: var(--muted);
+  padding: 4px 8px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  /* 徽章背景调整：匹配新的淡紫主题 */
+  background: rgba(248, 242, 250, 0.6);
+}
+
+.card{
+  border: 1px solid var(--line);
+  background: var(--card);
+  border-radius: 14px;
+  padding: 12px;
+  /* 阴影调整：更柔和的低透明度阴影，减少压迫感 */
+  box-shadow: 0 6px 16px rgba(180, 160, 190, 0.15);
+}
+
+.grid{
+  display:grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+label{
+  display:grid;
+  gap: 6px;
+  font-size: 12px;
+  color: var(--muted);
+}
+
+input[type="number"]{
+  appearance:none;
+  border: 1px solid var(--line);
+  /* 输入框背景调整：淡紫灰，匹配整体色系 */
+  background: rgba(249, 245, 250, 0.8);
+  color: var(--text);
+  border-radius: 12px;
+  padding: 10px 10px;
+  font-size: 13px;
+  outline: none;
+  /* 新增：聚焦样式，提升交互体验 */
+}
+input[type="number"]:focus{
+  border-color: rgba(186, 156, 200, 0.6);
+  box-shadow: 0 0 0 2px rgba(224, 208, 232, 0.4);
+}
+
+.row{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap: 10px;
+  margin-top: 12px;
+}
+
+.toggle{
+  display:flex;
+  align-items:center;
+  gap: 8px;
+  font-size: 12px;
+  color: var(--muted);
+}
+.toggle input{ transform: translateY(1px); }
+
+.color{
+  display:grid;
+  gap: 6px;
+  font-size: 12px;
+  color: var(--muted);
+  justify-items:end;
+}
+.color input[type="color"]{
+  width: 50px;
+  height: 30px;
+  padding: 0;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  /* 颜色选择器背景调整：匹配整体色系 */
+  background: rgba(249, 245, 250, 0.8);
+  cursor: pointer;
+}
+
+.actions{
+  display:grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin-top: 14px;
+}
+
+button{
+  border: 1px solid var(--line);
+  background: var(--btn);
+  color: var(--text);
+  border-radius: 12px;
+  padding: 5px 0;
+  font-size: 13px;
+  cursor: pointer;
+  white-space: nowrap;
+  /* 新增：轻微过渡，提升悬浮体验 */
+  transition: background 0.2s ease;
+}
+button:hover{ 
+  background: var(--btnHover); 
+  /* 新增：悬浮时轻微加深边框，增强反馈 */
+  border-color: rgba(196, 172, 206, 0.4);
+}
+
+.note#msg {
+  /* 核心1：文本水平居中 */
+  text-align: center;
+  /* 核心2：块级元素水平居中（需设置宽度或margin:auto） */
+  width: 100%; /* 占满父容器宽度 */
+  margin: 10px auto 0; /* 左右自动居中 */
+  /* 可选：如果需要垂直居中，需配合父容器的flex布局 */
+  font-size: 11px;
+  color: var(--muted);
+  line-height: 1.35;
+  min-height: 16px;
+}

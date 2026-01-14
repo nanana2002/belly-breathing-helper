@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>腹式呼吸</title>
+  <link rel="stylesheet" href="popup.css" />
+</head>
+<body>
+  <div class="header">
+    <h1>腹式呼吸</h1>
+  </div>
+
+  <div class="card">
+    <div class="grid">
+      <label><span>吸气（秒）</span><input id="inhale" type="number" min="1" max="20"></label>
+      <label><span>呼气（秒）</span><input id="exhale" type="number" min="1" max="20"></label>
+    </div>
+
+    <div class="row">
+      <label class="toggle">
+        <input id="followPage" type="checkbox">
+        <span>跟随页面颜色</span>
+      </label>
+
+    <label class="toggle">
+        <input id="globalMode" type="checkbox" checked>
+        <span>所有网页都显示</span>
+    </label>
+
+      <label class="color">
+        <span>自选颜色</span>
+        <input id="ballColor" type="color" value="#ffffff">
+      </label>
+    </div>
+
+    <div class="actions">
+      <button id="show">显示</button>
+      <button id="hide">隐藏</button>
+    </div>
+
+    <p class="note" id="msg"></p>
+  </div>
+
+  <script src="popup.js"></script>
+</body>
+</html>

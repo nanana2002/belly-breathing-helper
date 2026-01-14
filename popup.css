@@ -147,7 +147,7 @@ button:hover{
 .note#msg {
   /* 核心1：文本水平居中 */
   text-align: center;
-  /* 核心2：块级元素水平居中（需设置宽度或margin:auto） */
+  /* 核心2：块级元素水平居中（需 设置宽度或margin:auto） */
   width: 100%; /* 占满父容器宽度 */
   margin: 10px auto 0; /* 左右自动居中 */
   /* 可选：如果需要垂直居中，需配合父容器的flex布局 */
